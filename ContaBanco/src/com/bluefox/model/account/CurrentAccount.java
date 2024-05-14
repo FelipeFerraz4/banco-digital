@@ -1,47 +1,29 @@
 package com.bluefox.model.account;
-public class CurrentAccount {
-    private String name;
-    private String bankBranch;
-    private int accontNumber;
-    private double bankBalance;
+public class CurrentAccount extends Account{
 
-    public CurrentAccount(String name, String bankBranch, int accontNumber, double bankBalance) {
-        this.name = name;
-        this.bankBranch = bankBranch;
-        this.accontNumber = accontNumber;
-        this.bankBalance = bankBalance;
+    public CurrentAccount() {
+        super("current account");
     }
 
-    public String getName() {
-        return name;
+    public void bankPaymentByBankSlip(double value, Account account) {
+        if (value < 3) {
+            System.out.println("Invalid value, withdraw at least R$ 3,00");
+        }
+        this.bankTransfer(value, account);
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public String getAccountData() {
+        return String.format("==== Current Account ====%n" +
+        "Bank Branch: %04d%n" +
+        "Account Number: %06d%n" +
+        "Bank Balance: $ %.2f" , this.getBankBranch(), this.getAccountNumber(), this.getBankBalance()).replace(",", ".");
     }
 
-    public String getBankBranch() {
-        return bankBranch;
+    @Override
+    public String getBankingOperationAvailable() {
+        return "==== Banking Operation Available ====" +
+        "\nWithdraw" + "\nDeposit" + "\nTransfer" +
+        "\nPaymentByBankSlip";
     }
-
-    public void setBankBranch(String bankBranch) {
-        this.bankBranch = bankBranch;
-    }
-
-    public int getAccontNumber() {
-        return accontNumber;
-    }
-
-    public void setAccontNumber(int accontNumber) {
-        this.accontNumber = accontNumber;
-    }
-
-    public double getBankBalance() {
-        return bankBalance;
-    }
-
-    public void setBankBalance(double bankBalance) {
-        this.bankBalance = bankBalance;
-    }
-
 }
