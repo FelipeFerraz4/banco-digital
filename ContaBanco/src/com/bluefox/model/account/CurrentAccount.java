@@ -1,3 +1,4 @@
+package com.bluefox.model.account;
 public class CurrentAccount {
     private String name;
     private String bankBranch;

@@ -1,4 +1,7 @@
+package com.bluefox.view;
 import java.util.Scanner;
+
+import com.bluefox.model.account.CurrentAccount;
 
 public class App {
     public static void main(String[] args) throws Exception {
