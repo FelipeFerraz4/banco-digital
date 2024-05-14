@@ -7,13 +7,13 @@ public abstract class Account {
 
     private String accountType;
     private int bankBranch;
-    private int accontNumber;
+    private int accountNumber;
     private double bankBalance;
     
     public Account(String accountType) {
         this.accountType = accountType;
         this.bankBranch = BANK_BRANCH;
-        this.accontNumber = SERIAL_ACCOUNT_NUMBER++;
+        this.accountNumber = SERIAL_ACCOUNT_NUMBER++;
         this.bankBalance = 0;
     }
 
@@ -43,6 +43,18 @@ public abstract class Account {
         this.bankBalance -= value;
     }
 
+    public String getAccountData() {
+        return String.format("==== Account ====%n" +
+        "Bank Branch: %04d%n" +
+        "Account Number: %06d%n" +
+        "Bank Balance: $ %.2f" , this.getBankBranch(), this.getAccountNumber(), this.getBankBalance()).replace(",", ".");
+    }
+
+    public String getBankingOperationAvailable() {
+        return "==== Banking Operation Available ====" +
+        "\nWithdraw" + "\nDeposit" + "\nTransfer";
+    }
+
     protected String getAccountType() {
         return accountType;
     }
@@ -51,8 +63,8 @@ public abstract class Account {
         return bankBranch;
     }
 
-    protected int getAccontNumber() {
-        return accontNumber;
+    protected int getAccountNumber() {
+        return accountNumber;
     }
 
     protected double getBankBalance() {
@@ -64,7 +76,7 @@ public abstract class Account {
         final int prime = 31;
         int result = 1;
         result = prime * result + bankBranch;
-        result = prime * result + accontNumber;
+        result = prime * result + accountNumber;
         return result;
     }
 
@@ -79,14 +91,14 @@ public abstract class Account {
         Account other = (Account) obj;
         if (bankBranch != other.bankBranch)
             return false;
-        if (accontNumber != other.accontNumber)
+        if (accountNumber != other.accountNumber)
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "Account [accountType: " + accountType + ", bankBranch: " + bankBranch + ", accontNumber: " + accontNumber
+        return "Account [accountType: " + accountType + ", bankBranch: " + bankBranch + ", accountNumber: " + accountNumber
                 + ", bankBalance: " + bankBalance + "]";
     }
 }
