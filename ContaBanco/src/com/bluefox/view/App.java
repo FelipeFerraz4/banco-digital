@@ -1,18 +1,24 @@
 package com.bluefox.view;
 import java.util.Scanner;
 
-import com.bluefox.model.account.Account;
-import com.bluefox.model.account.CurrentAccount;
-
+// import com.bluefox.model.account.Account;
+// import com.bluefox.model.account.CurrentAccount;
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         
-        Account currentAccount = new CurrentAccount();
+        Menu menus = new Menu();
+        menus.homeMenu(scanner);
 
-        System.out.println(currentAccount);
-        System.out.println(currentAccount.getAccountData());
-        System.out.println(currentAccount.getBankingOperationAvailable());
+
+
+
+
+        // Account currentAccount = new CurrentAccount();
+
+        // System.out.println(currentAccount);
+        // System.out.println(currentAccount.getAccountData());
+        // System.out.println(currentAccount.getBankingOperationAvailable());
 
         // System.out.println("Por favor, Digite o seu nome: ");
         // String name = scanner.nextLine();

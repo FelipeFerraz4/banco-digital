@@ -24,8 +24,4 @@ public class Client {
     public void addAccount(Account account) {
         accounts.add(account);
     }
-    
-
-    
-
 }
