@@ -17,19 +17,45 @@ public abstract class Account {
         this.bankBalance = 0;
     }
 
-    public String getAccountType() {
+    protected void bankWithdraw(double value) {
+        if (value < 2) {
+            System.out.println("Invalid value, withdraw at least R$ 2,00");
+        } else if (this.bankBalance < value) {
+            System.out.println("Insufficient bank balance for operation");
+        }
+
+        this.bankBalance -= value;
+    }
+
+    protected void bankDeposit(double value) {
+        if (value < 0.01) {
+            System.out.println("Invalid value, deposit at least R$ 0,01");
+        }
+
+        this.bankBalance += value;
+    }
+
+    protected void bankTransfer(double value, Account account) {
+        if(this.bankBalance < value) {
+            System.out.println("Insufficient bank balance for operation");
+        }
+        account.bankDeposit(value);
+        this.bankBalance -= value;
+    }
+
+    protected String getAccountType() {
         return accountType;
     }
 
-    public int getBankBranch() {
+    protected int getBankBranch() {
         return bankBranch;
     }
 
-    public int getAccontNumber() {
+    protected int getAccontNumber() {
         return accontNumber;
     }
 
-    public double getBankBalance() {
+    protected double getBankBalance() {
         return bankBalance;
     }
 
