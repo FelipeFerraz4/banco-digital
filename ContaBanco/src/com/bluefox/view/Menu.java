@@ -57,8 +57,7 @@ public class Menu {
                 scanner.nextLine();
             }
             System.out.println("==== Become a bank customer ====");
-            System.out.println("Please, Type you name: ");
-            String name = scanner.nextLine();
+            String name = UserCredentialInput.getFullName(scanner);
             System.out.println("Now, please, enter a password: ");
             String password = scanner.nextLine();
     

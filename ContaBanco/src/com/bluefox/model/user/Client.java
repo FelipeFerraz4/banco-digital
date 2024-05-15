@@ -31,7 +31,12 @@ public class Client {
         return password;
     }
 
+    public ClientStatus getStatus() {
+        return status;
+    }
+    
     public void addAccount(Account account) {
         accounts.add(account);
     }
+
 }
