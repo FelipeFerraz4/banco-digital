@@ -1,5 +1,8 @@
 package com.bluefox.model.account;
 
+import com.bluefox.exception.account.InsufficientBankBalanceException;
+import com.bluefox.exception.account.InvalidValue;
+
 public abstract class Account {
     
     private static final int BANK_BRANCH = 1;
@@ -17,27 +20,27 @@ public abstract class Account {
         this.bankBalance = 0;
     }
 
-    protected void bankWithdraw(double value) {
+    protected void bankWithdraw(double value) throws InvalidValue, InsufficientBankBalanceException {
         if (value < 2) {
-            System.out.println("Invalid value, withdraw at least R$ 2,00");
+            throw new InvalidValue("Invalid value, withdraw at least R$ 2,00");
         } else if (this.bankBalance < value) {
-            System.out.println("Insufficient bank balance for operation");
+            throw new InsufficientBankBalanceException();
         }
 
         this.bankBalance -= value;
     }
 
-    protected void bankDeposit(double value) {
+    protected void bankDeposit(double value) throws InvalidValue {
         if (value < 0.01) {
-            System.out.println("Invalid value, deposit at least R$ 0,01");
+            throw new InvalidValue("Invalid value, deposit at least R$ 0,01");
         }
 
         this.bankBalance += value;
     }
 
-    protected void bankTransfer(double value, Account account) {
+    protected void bankTransfer(double value, Account account) throws InvalidValue, InsufficientBankBalanceException {
         if(this.bankBalance < value) {
-            System.out.println("Insufficient bank balance for operation");
+            throw new InsufficientBankBalanceException();
         }
         account.bankDeposit(value);
         this.bankBalance -= value;
