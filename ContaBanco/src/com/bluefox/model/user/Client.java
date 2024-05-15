@@ -4,15 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bluefox.model.account.Account;
+import com.bluefox.utils.ClientStatus;
 
 public class Client {
     private String name;
     private String password;
+    private ClientStatus status;
     private List<Account> accounts;
     
     public Client(String name, String password) {
         this.name = name;
         this.password = password;
+        this.status = ClientStatus.ACTIVE;
         this.accounts = new ArrayList<>();
     }
 
