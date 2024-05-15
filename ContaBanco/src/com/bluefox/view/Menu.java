@@ -2,12 +2,18 @@ package com.bluefox.view;
 
 import java.util.Scanner;
 
-import com.bluefox.model.account.Account;
-import com.bluefox.model.account.CurrentAccount;
-import com.bluefox.model.user.Client;
+import com.bluefox.controller.Bank;
 
 public class Menu {
+
+    private Bank bank;
+
     
+    
+    public Menu() {
+        this.bank = new Bank();
+    }
+
     public void homeMenu(Scanner scanner) {
         try {
             String options = String.format("==== Bank System ====" +
@@ -46,14 +52,19 @@ public class Menu {
     }
 
     public void createAccount(Scanner scanner) {
-        System.out.println("==== Become a bank customer ====");
-        System.out.println("Please, Type you name: ");
-        String name = scanner.nextLine();
-        System.out.println("Now, please, enter a password: ");
-        String password = scanner.nextLine();
-
-        Client client = new Client(name, password);
-        Account account = new CurrentAccount();
-        client.addAccount(account);
+        try {
+            if(scanner.hasNextLine()) {
+                scanner.nextLine();
+            }
+            System.out.println("==== Become a bank customer ====");
+            System.out.println("Please, Type you name: ");
+            String name = scanner.nextLine();
+            System.out.println("Now, please, enter a password: ");
+            String password = scanner.nextLine();
+    
+            bank.addClient(name, password);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
     }
 }
