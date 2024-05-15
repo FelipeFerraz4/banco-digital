@@ -1,7 +1,12 @@
 package com.bluefox.model.user;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import com.bluefox.model.account.Account;
 import com.bluefox.utils.ClientStatus;
@@ -11,12 +16,14 @@ public class Client {
     private String password;
     private ClientStatus status;
     private List<Account> accounts;
+    private Map<LocalDateTime, String> operations;
     
     public Client(String name, String password) {
         this.name = name;
         this.password = password;
         this.status = ClientStatus.ACTIVE;
         this.accounts = new ArrayList<>();
+        this.operations = new TreeMap<>();
     }
 
     public String getName() {
@@ -34,9 +41,18 @@ public class Client {
     public ClientStatus getStatus() {
         return status;
     }
-    
+
+    public Map<LocalDateTime, String> getOperations() {
+        return operations;
+    }
+
     public void addAccount(Account account) {
         accounts.add(account);
     }
+
+    public void addOperation(LocalDateTime dateTime, String operation) {
+        operations.put(dateTime, operation);
+    }
+
 
 }
