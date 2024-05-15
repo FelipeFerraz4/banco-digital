@@ -12,7 +12,7 @@ public class UserCredentialInput {
         String name = null;
         while (true) {
             try {
-                System.out.println("Please, Type you name: ");
+                System.out.println("Por favor, digite seu nome: ");
                 name = scanner.nextLine();
                 CustomerValidation.isValidName(name);
                 break;
@@ -21,5 +21,37 @@ public class UserCredentialInput {
             }
         }
         return name;
+    }
+
+    public static String getCPF(Scanner scanner) {
+        String cpf = null;
+        while (true) {
+            // try {
+                System.out.println("Por favor, digite o seu CPF: ");
+                cpf = scanner.nextLine();
+                // CustomerValidation.isValidName(name);
+                break;
+            // } 
+            // catch (EmptyOrNullElementException | InvalidElementException e) {
+            //     System.out.println(e.getMessage());
+            // }
+        }
+        return cpf;
+    }
+
+    public static String getPassword(Scanner scanner) {
+        String password = null;
+        while (true) {
+            // try {
+                System.out.println("Digite sua senha, por favor: ");
+                password = scanner.nextLine();
+                // CustomerValidation.isValidName(name);
+                break;
+            // } 
+            // catch (EmptyOrNullElementException | InvalidElementException e) {
+            //     System.out.println(e.getMessage());
+            // }
+        }
+        return password;
     }
 }

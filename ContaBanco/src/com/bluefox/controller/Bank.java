@@ -14,13 +14,17 @@ public class Bank {
         this.clients = new HashSet<>();
     }
 
-    public void addClient(String name, String password) {
-        Client client = new Client(name, password);
+    public void addClient(String name, String password, String cpf) {
+        Client client = new Client(name, password, cpf);
 
         Account account = new CurrentAccount();
         client.addAccount(account);
         
         clients.add(client);
+    }
+
+    public void chechClient(String cpf, String password) {
+        
     }
     
 }
