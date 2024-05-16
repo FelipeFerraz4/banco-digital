@@ -2,8 +2,12 @@ package com.bluefox.view.Menus;
 
 import java.util.Scanner;
 
+import com.bluefox.controller.Bank;
+import com.bluefox.model.account.Account;
+import com.bluefox.model.client.Client;
+
 public class ClientMenu {
-    public static void customerMenu(Scanner scanner) {
+    public static void customerMenu(Scanner scanner, Bank bank, Client client) {
         try {
             String options = String.format("==== Menu do Cliente ====" +
             "%n1 - Check Statement." +
@@ -12,8 +16,8 @@ public class ClientMenu {
             "%n4 - Transfer Money." +
             "%n5 - Payment." +
             "%n6 - Investment." +
-            "%n7 - Show Date." +
-            "%n0 - Close Menu.");
+            "%n7 - Mostrar Meus Dados." +
+            "%n0 - Fechar Menu.");
 
             int option = -1;
 
@@ -24,7 +28,7 @@ public class ClientMenu {
 
                 switch (option) {
                     case 0:
-                        System.out.println("Finished System");
+                        System.out.println("Menu Fechado");
                         break;
                     case 1:
                         System.out.println("Login Successfully");
@@ -42,13 +46,13 @@ public class ClientMenu {
                         System.out.println("Login Successfully");
                         break;
                     case 6:
-                        System.out.println("Login Successfully");
+                        System.out.println("Menu Fechado");
                         break;
                     case 7:
-                        System.out.println("Login Successfully");
+                        getClientData(client);
                         break;
                     default:
-                        System.out.println("Invalid Value Entered");
+                        System.out.println("Valor digitado Invalidado.");
                         break;
                 }
             }
@@ -56,5 +60,20 @@ public class ClientMenu {
             System.out.println("Exception");
             e.printStackTrace();
         }
+    }
+
+    private static void getClientData(Client client) {
+        String data = String.format("%n==== Dados do Cliente ====" + 
+                "%nNome: %s" +
+                "%nCPF: %s" +
+                "%nSenha: %s" 
+                , client.getName(), client.getCPF(), client.getPassword());
+        
+        for (Account account : client.getAccounts()) {
+            data += String.format("%n");
+            data += account.getAccountData();
+        }
+        data += String.format("%n");
+        System.out.println(data);
     }
 }

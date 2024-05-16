@@ -1,4 +1,4 @@
-package com.bluefox.model.user;
+package com.bluefox.model.client;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,8 +11,8 @@ import com.bluefox.utils.ClientStatus;
 
 public class Client {
     private String name;
-    private String password;
     private String cpf;
+    private String password;
     private ClientStatus status;
     private List<Account> accounts;
     private Map<LocalDateTime, String> operations;
@@ -81,6 +81,12 @@ public class Client {
         } else if (!cpf.equals(other.cpf))
             return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Client [name=" + name + ", cpf=" + cpf + ", password=" + password + ", status=" + status + ", accounts="
+                + accounts + ", operations=" + operations + "]";
     }
 
 

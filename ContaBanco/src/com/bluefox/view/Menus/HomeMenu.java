@@ -6,6 +6,7 @@ import com.bluefox.controller.Bank;
 import com.bluefox.exception.bank.ElementNotFindException;
 import com.bluefox.exception.bank.EmptyCustomerBankException;
 import com.bluefox.exception.bank.IncompatiblePasswordException;
+import com.bluefox.model.client.Client;
 import com.bluefox.view.UserCredentialInput;
 
 public class HomeMenu {
@@ -55,8 +56,8 @@ public class HomeMenu {
             System.out.println("==== Login no Sistema ====");
             String cpf = UserCredentialInput.getCPF(scanner);
             String password = UserCredentialInput.getPassword(scanner);
-            bank.checkClient(cpf, password);
-            ClientMenu.customerMenu(scanner);
+            Client client = bank.checkClient(cpf, password);
+            ClientMenu.customerMenu(scanner, bank, client);
         } catch (EmptyCustomerBankException | ElementNotFindException e) {
             System.out.println("Conta não encontrada");
         } catch (IncompatiblePasswordException e) {

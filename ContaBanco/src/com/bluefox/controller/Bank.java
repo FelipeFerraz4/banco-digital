@@ -8,7 +8,7 @@ import com.bluefox.exception.bank.EmptyCustomerBankException;
 import com.bluefox.exception.bank.IncompatiblePasswordException;
 import com.bluefox.model.account.Account;
 import com.bluefox.model.account.CurrentAccount;
-import com.bluefox.model.user.Client;
+import com.bluefox.model.client.Client;
 
 public class Bank {
     private Set<Client> clients;
@@ -33,7 +33,7 @@ public class Bank {
 
         Client clientToCheck = null;
         for (Client client : clients) {
-            if (client.equals(clientToCheck)) {
+            if (client.getCPF().equals(cpf)) {
                 clientToCheck = client;
             }
         }
@@ -47,6 +47,11 @@ public class Bank {
         }
 
         return clientToCheck;
+    }
+
+    @Override
+    public String toString() {
+        return "Bank [clients=" + clients + "]";
     }
     
 }
