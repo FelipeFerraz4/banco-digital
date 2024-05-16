@@ -3,6 +3,9 @@ package com.bluefox.controller;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.bluefox.exception.bank.ElementNotFindException;
+import com.bluefox.exception.bank.EmptyCustomerBankException;
+import com.bluefox.exception.bank.IncompatiblePasswordException;
 import com.bluefox.model.account.Account;
 import com.bluefox.model.account.CurrentAccount;
 import com.bluefox.model.user.Client;
@@ -23,8 +26,27 @@ public class Bank {
         clients.add(client);
     }
 
-    public void chechClient(String cpf, String password) {
-        
+    public Client checkClient(String cpf, String password) throws EmptyCustomerBankException, ElementNotFindException, IncompatiblePasswordException {
+        if (clients.isEmpty()) {
+            throw new EmptyCustomerBankException();
+        }
+
+        Client clientToCheck = null;
+        for (Client client : clients) {
+            if (client.equals(clientToCheck)) {
+                clientToCheck = client;
+            }
+        }
+
+        if (clientToCheck == null) {
+            throw new ElementNotFindException("Element Not Find in Customer Bank Set");
+        }
+
+        if (!clientToCheck.getPassword().equals(password)) {
+            throw new IncompatiblePasswordException("Incompatible Client Password");
+        }
+
+        return clientToCheck;
     }
     
 }

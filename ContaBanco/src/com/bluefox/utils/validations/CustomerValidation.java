@@ -24,4 +24,29 @@ public class CustomerValidation {
             throw new InvalidElementException("Invalid Name");
         }
     }
+
+
+    /**
+     * Validates that the given cpf is valid.
+     * 
+     * @param cpf The cpf to validate.
+     * @throws EmptyOrNullElementException if the cpf is null or empty.
+     */
+    public static void isValidCPF(String cpf) throws EmptyOrNullElementException {
+        if (cpf == null || cpf.trim().isEmpty()) {
+            throw new EmptyOrNullElementException("Empty or Null Name");
+        } 
+    }
+
+    /**
+     * Validates that the given password is valid.
+     * 
+     * @param password The password to validate.
+     * @throws EmptyOrNullElementException if the password is null or empty.
+     */
+    public static void isValidPassword(String password) throws EmptyOrNullElementException {
+        if (password == null || password.trim().isEmpty()) {
+            throw new EmptyOrNullElementException("Empty or Null Name");
+        } 
+    }
 }

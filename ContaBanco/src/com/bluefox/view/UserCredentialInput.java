@@ -17,7 +17,7 @@ public class UserCredentialInput {
                 CustomerValidation.isValidName(name);
                 break;
             } catch (EmptyOrNullElementException | InvalidElementException e) {
-                System.out.println(e.getMessage());
+                System.out.println("Nome invalido, digite apenas letras");
             }
         }
         return name;
@@ -26,15 +26,15 @@ public class UserCredentialInput {
     public static String getCPF(Scanner scanner) {
         String cpf = null;
         while (true) {
-            // try {
+            try {
                 System.out.println("Por favor, digite o seu CPF: ");
                 cpf = scanner.nextLine();
-                // CustomerValidation.isValidName(name);
+                CustomerValidation.isValidCPF(cpf);
                 break;
-            // } 
-            // catch (EmptyOrNullElementException | InvalidElementException e) {
-            //     System.out.println(e.getMessage());
-            // }
+            } 
+            catch (EmptyOrNullElementException e) {
+                System.out.println("CPF invalido");
+            }
         }
         return cpf;
     }
@@ -42,15 +42,15 @@ public class UserCredentialInput {
     public static String getPassword(Scanner scanner) {
         String password = null;
         while (true) {
-            // try {
+            try {
                 System.out.println("Digite sua senha, por favor: ");
                 password = scanner.nextLine();
-                // CustomerValidation.isValidName(name);
+                CustomerValidation.isValidPassword(password);
                 break;
-            // } 
-            // catch (EmptyOrNullElementException | InvalidElementException e) {
-            //     System.out.println(e.getMessage());
-            // }
+            } 
+            catch (EmptyOrNullElementException e) {
+                System.out.println("Senha invalida, não pode ser vazia");
+            }
         }
         return password;
     }
