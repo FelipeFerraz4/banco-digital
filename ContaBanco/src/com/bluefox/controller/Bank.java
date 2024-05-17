@@ -28,12 +28,39 @@ public class Bank {
         clients.add(client);
     }
 
-    public void addDeposit(double value, Client client) throws InvalidValue {
+    public void deposit(double value, Client client) throws InvalidValue {
         client.getAccounts().get(0).bankDeposit(value);
     }
 
-    public void addWithdraw(double value, Client client) throws InvalidValue, InsufficientBankBalanceException {
+    public void withdraw(double value, Client client) throws InvalidValue, InsufficientBankBalanceException {
         client.getAccounts().get(0).bankWithdraw(value);
+    }
+
+    public void transfer(double value, Client client, int bankBranch, int accountNumber) throws EmptyCustomerBankException, ElementNotFindException, InvalidValue, InsufficientBankBalanceException {
+        Account account = checkAccountExistence(bankBranch, accountNumber);
+
+        client.getAccounts().get(0).bankTransfer(value, account);
+    }
+
+    public Account checkAccountExistence(int bankBranch, int accountNumber) throws EmptyCustomerBankException, ElementNotFindException {
+        if (clients.isEmpty()) {
+            throw new EmptyCustomerBankException();
+        }
+
+        Account accountToCheck = null;
+        for (Client client : clients) {
+            for (Account account : client.getAccounts()) {
+                if(account.getBankBranch() == bankBranch && account.getAccountNumber() == accountNumber) {
+                    accountToCheck = account;
+                }
+            }
+        }
+
+        if (accountToCheck == null) {
+            throw new ElementNotFindException("Element Not Find in Customer Bank Set");
+        }
+
+        return accountToCheck;
     }
 
     public Client checkClient(String cpf, String password) throws EmptyCustomerBankException, ElementNotFindException, IncompatiblePasswordException {

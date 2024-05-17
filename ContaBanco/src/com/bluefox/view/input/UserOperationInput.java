@@ -20,4 +20,34 @@ public class UserOperationInput {
         }
         return value;
     }
+
+    public static int getBankBranch(Scanner scanner) {
+        int bankBranch;
+        while (true) {
+            try {
+                System.out.println("Por favor, digite a agência: ");
+                bankBranch = scanner.nextInt();
+                OperationValidation.isValidBankBranch(bankBranch);;
+                break;
+            } catch (InvalidElementException e) {
+                System.out.println("Agência informado invalida.");
+            }
+        }
+        return bankBranch;
+    }
+
+    public static int getAccountNumber(Scanner scanner) {
+        int accountNumber;
+        while (true) {
+            try {
+                System.out.println("Por favor, digite o número da conta: ");
+                accountNumber = scanner.nextInt();
+                OperationValidation.isValidAccountNumber(accountNumber);
+                break;
+            } catch (InvalidElementException e) {
+                System.out.println("Número da conta informado invalido.");
+            }
+        }
+        return accountNumber;
+    }
 }

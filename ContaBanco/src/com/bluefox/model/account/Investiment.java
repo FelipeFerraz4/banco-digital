@@ -1,4 +1,4 @@
-package com.bluefox.exception.account;
+package com.bluefox.model.account;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

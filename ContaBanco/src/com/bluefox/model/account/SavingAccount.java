@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.bluefox.exception.account.EmptySavingAccountException;
-import com.bluefox.exception.account.Investiment;
 import com.bluefox.utils.Rate;
 
 public class SavingAccount extends Account{

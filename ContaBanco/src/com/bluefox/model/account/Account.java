@@ -58,19 +58,19 @@ public abstract class Account {
         "\nWithdraw" + "\nDeposit" + "\nTransfer";
     }
 
-    protected String getAccountType() {
+    public String getAccountType() {
         return accountType;
     }
 
-    protected int getBankBranch() {
+    public int getBankBranch() {
         return bankBranch;
     }
 
-    protected int getAccountNumber() {
+    public int getAccountNumber() {
         return accountNumber;
     }
 
-    protected double getBankBalance() {
+    public double getBankBalance() {
         return bankBalance;
     }
 
