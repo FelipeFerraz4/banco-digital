@@ -1,4 +1,4 @@
-package com.bluefox.view.Menus;
+package com.bluefox.view.menus;
 
 import java.util.Scanner;
 
@@ -7,7 +7,7 @@ import com.bluefox.exception.bank.ElementNotFindException;
 import com.bluefox.exception.bank.EmptyCustomerBankException;
 import com.bluefox.exception.bank.IncompatiblePasswordException;
 import com.bluefox.model.client.Client;
-import com.bluefox.view.UserCredentialInput;
+import com.bluefox.view.input.UserCredentialInput;
 
 public class HomeMenu {
 

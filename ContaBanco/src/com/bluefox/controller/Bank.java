@@ -3,6 +3,7 @@ package com.bluefox.controller;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.bluefox.exception.account.InvalidValue;
 import com.bluefox.exception.bank.ElementNotFindException;
 import com.bluefox.exception.bank.EmptyCustomerBankException;
 import com.bluefox.exception.bank.IncompatiblePasswordException;
@@ -24,6 +25,10 @@ public class Bank {
         client.addAccount(account);
         
         clients.add(client);
+    }
+
+    public void addDeposit(double value, Client client) throws InvalidValue {
+        client.getAccounts().get(0).bankDeposit(value);
     }
 
     public Client checkClient(String cpf, String password) throws EmptyCustomerBankException, ElementNotFindException, IncompatiblePasswordException {

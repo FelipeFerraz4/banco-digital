@@ -20,7 +20,7 @@ public abstract class Account {
         this.bankBalance = 0;
     }
 
-    protected void bankWithdraw(double value) throws InvalidValue, InsufficientBankBalanceException {
+    public void bankWithdraw(double value) throws InvalidValue, InsufficientBankBalanceException {
         if (value < 2) {
             throw new InvalidValue("Invalid value, withdraw at least R$ 2,00");
         } else if (this.bankBalance < value) {
@@ -30,7 +30,7 @@ public abstract class Account {
         this.bankBalance -= value;
     }
 
-    protected void bankDeposit(double value) throws InvalidValue {
+    public void bankDeposit(double value) throws InvalidValue {
         if (value < 0.01) {
             throw new InvalidValue("Invalid value, deposit at least R$ 0,01");
         }
@@ -38,7 +38,7 @@ public abstract class Account {
         this.bankBalance += value;
     }
 
-    protected void bankTransfer(double value, Account account) throws InvalidValue, InsufficientBankBalanceException {
+    public void bankTransfer(double value, Account account) throws InvalidValue, InsufficientBankBalanceException {
         if(this.bankBalance < value) {
             throw new InsufficientBankBalanceException();
         }

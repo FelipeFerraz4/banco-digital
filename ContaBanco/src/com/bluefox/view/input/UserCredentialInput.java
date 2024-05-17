@@ -1,4 +1,4 @@
-package com.bluefox.view;
+package com.bluefox.view.input;
 
 import java.util.Scanner;
 

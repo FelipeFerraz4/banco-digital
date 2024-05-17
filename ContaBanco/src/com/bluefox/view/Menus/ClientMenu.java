@@ -1,10 +1,12 @@
-package com.bluefox.view.Menus;
+package com.bluefox.view.menus;
 
 import java.util.Scanner;
 
 import com.bluefox.controller.Bank;
+import com.bluefox.exception.account.InvalidValue;
 import com.bluefox.model.account.Account;
 import com.bluefox.model.client.Client;
+import com.bluefox.view.input.UserOperationInput;
 
 public class ClientMenu {
     public static void customerMenu(Scanner scanner, Bank bank, Client client) {
@@ -12,7 +14,7 @@ public class ClientMenu {
             String options = String.format("==== Menu do Cliente ====" +
             "%n1 - Check Statement." +
             "%n2 - Withdraw Money." +
-            "%n3 - Cash Deposit." +
+            "%n3 - Depósito." +
             "%n4 - Transfer Money." +
             "%n5 - Payment." +
             "%n6 - Investment." +
@@ -37,7 +39,8 @@ public class ClientMenu {
                         System.out.println("Registration Completed Successfully");
                         break;
                     case 3:
-                        System.out.println("Login Successfully");
+                        addDeposit(scanner, client, bank);
+                        // System.out.println("Login Successfully");
                         break;
                     case 4:
                         System.out.println("Login Successfully");
@@ -52,7 +55,7 @@ public class ClientMenu {
                         getClientData(client);
                         break;
                     default:
-                        System.out.println("Valor digitado Invalidado.");
+                        System.out.println("Valor Digitado Invalidado.");
                         break;
                 }
             }
@@ -75,5 +78,16 @@ public class ClientMenu {
         }
         data += String.format("%n");
         System.out.println(data);
+    }
+
+    private static void addDeposit(Scanner scanner, Client client, Bank bank) {
+        try {
+            System.out.println("==== Depósito Bancário ====");
+            double value = UserOperationInput.getValue(scanner);
+            bank.addDeposit(value, client);
+        } catch (InvalidValue e) {
+            System.out.println("Valor invalido, deve ser no mínimo R$ 0,01");
+        }
+        
     }
 }
