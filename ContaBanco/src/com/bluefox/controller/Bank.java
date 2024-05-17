@@ -3,6 +3,7 @@ package com.bluefox.controller;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.bluefox.exception.account.InsufficientBankBalanceException;
 import com.bluefox.exception.account.InvalidValue;
 import com.bluefox.exception.bank.ElementNotFindException;
 import com.bluefox.exception.bank.EmptyCustomerBankException;
@@ -29,6 +30,10 @@ public class Bank {
 
     public void addDeposit(double value, Client client) throws InvalidValue {
         client.getAccounts().get(0).bankDeposit(value);
+    }
+
+    public void addWithdraw(double value, Client client) throws InvalidValue, InsufficientBankBalanceException {
+        client.getAccounts().get(0).bankWithdraw(value);
     }
 
     public Client checkClient(String cpf, String password) throws EmptyCustomerBankException, ElementNotFindException, IncompatiblePasswordException {

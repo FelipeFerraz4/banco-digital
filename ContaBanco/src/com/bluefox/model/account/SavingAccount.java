@@ -58,10 +58,9 @@ public class SavingAccount extends Account{
         return String.format("==== Saving Account ====%n" +
         "Bank Branch: %04d%n" +
         "Account Number: %06d%n" +
-        "Bank Balance: $ %.2f" , 
+        "Bank Balance: R$ %.2f" , 
         this.getBankBranch(), 
         this.getAccountNumber(), 
-        this.getBankBalance())
-            .replace(",", ".");
+        this.getBankBalance());
     }
 }

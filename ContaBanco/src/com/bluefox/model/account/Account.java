@@ -50,7 +50,7 @@ public abstract class Account {
         return String.format("==== Account ====%n" +
         "Bank Branch: %04d%n" +
         "Account Number: %06d%n" +
-        "Bank Balance: $ %.2f" , this.getBankBranch(), this.getAccountNumber(), this.getBankBalance()).replace(",", ".");
+        "Bank Balance: R$ %.2f" , this.getBankBranch(), this.getAccountNumber(), this.getBankBalance());
     }
 
     public String getBankingOperationAvailable() {

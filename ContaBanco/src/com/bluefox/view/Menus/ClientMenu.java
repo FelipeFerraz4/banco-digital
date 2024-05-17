@@ -3,6 +3,7 @@ package com.bluefox.view.menus;
 import java.util.Scanner;
 
 import com.bluefox.controller.Bank;
+import com.bluefox.exception.account.InsufficientBankBalanceException;
 import com.bluefox.exception.account.InvalidValue;
 import com.bluefox.model.account.Account;
 import com.bluefox.model.client.Client;
@@ -16,9 +17,8 @@ public class ClientMenu {
             "%n2 - Withdraw Money." +
             "%n3 - Depósito." +
             "%n4 - Transfer Money." +
-            "%n5 - Payment." +
-            "%n6 - Investment." +
-            "%n7 - Mostrar Meus Dados." +
+            "%n5 - Investment." +
+            "%n6 - Mostrar Meus Dados." +
             "%n0 - Fechar Menu.");
 
             int option = -1;
@@ -36,11 +36,10 @@ public class ClientMenu {
                         System.out.println("Login Successfully");
                         break;
                     case 2:
-                        System.out.println("Registration Completed Successfully");
+                        addWithdraw(scanner, client, bank);
                         break;
                     case 3:
                         addDeposit(scanner, client, bank);
-                        // System.out.println("Login Successfully");
                         break;
                     case 4:
                         System.out.println("Login Successfully");
@@ -49,9 +48,6 @@ public class ClientMenu {
                         System.out.println("Login Successfully");
                         break;
                     case 6:
-                        System.out.println("Menu Fechado");
-                        break;
-                    case 7:
                         getClientData(client);
                         break;
                     default:
@@ -85,9 +81,23 @@ public class ClientMenu {
             System.out.println("==== Depósito Bancário ====");
             double value = UserOperationInput.getValue(scanner);
             bank.addDeposit(value, client);
+            System.out.println("Deposito efetuado com sucesso.");
         } catch (InvalidValue e) {
-            System.out.println("Valor invalido, deve ser no mínimo R$ 0,01");
+            System.out.println("Valor invalido, deve ser no mínimo R$ 0,01.");
         }
         
+    }
+
+    private static void addWithdraw(Scanner scanner, Client client, Bank bank) {
+        try {
+            System.out.println("==== Saque Bancário ====");
+            double value = UserOperationInput.getValue(scanner);
+            bank.addWithdraw(value, client);
+            System.out.println("Saque realizado com sucesso.");
+        } catch (InvalidValue e) {
+            System.out.println("Valor invalido, deve ser no mínimo R$ 2,00.");
+        } catch (InsufficientBankBalanceException e) {
+            System.out.println("Saldo insuficiente");
+        }
     }
 }
