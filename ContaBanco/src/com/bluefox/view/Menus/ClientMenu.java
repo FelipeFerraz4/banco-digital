@@ -14,11 +14,11 @@ import com.bluefox.view.input.UserOperationInput;
 public class ClientMenu {
     public static void customerMenu(Scanner scanner, Bank bank, Client client) {
         String options = String.format("==== Menu do Cliente ====" +
-        "%n1 - Check Statement." +
+        "%n1 - Extrato." +
         "%n2 - Saque." +
         "%n3 - Depósito." +
         "%n4 - Transferir." +
-        "%n5 - Investment." +
+        "%n5 - Poupança." +
         "%n6 - Mostrar Meus Dados." +
         "%n0 - Fechar Menu.");
 
@@ -34,7 +34,7 @@ public class ClientMenu {
                     System.out.println("Menu Fechado");
                     break;
                 case 1:
-                    System.out.println("Login Successfully");
+                    statement(client, bank);
                     break;
                 case 2:
                     withdraw(scanner, client, bank);
@@ -46,7 +46,7 @@ public class ClientMenu {
                     transfer(scanner, client, bank);
                     break;
                 case 5:
-                    System.out.println("Login Successfully");
+                    investiment(scanner, client, bank);
                     break;
                 case 6:
                     getClientData(client);
@@ -117,4 +117,40 @@ public class ClientMenu {
         }
 
     }
+
+    private static void statement(Client client, Bank bank) {
+        System.out.println("==== Extrato Bancária ====");
+        System.out.print(bank.statement(client));
+    }
+
+    private static void investiment(Scanner scanner, Client client, Bank bank) {
+        System.out.println(client.getAccounts().size());
+        if (client.getAccounts().size() > 1) {
+            InsvestimentMenu.SavingMenu(scanner, bank, client);
+        } else {
+            String message = String.format("==== Poupança ====%n" + 
+                        "Gostaria de criar conta poupaça: " + 
+                        "1 - Sim%n" +
+                        "0 - Não%n");
+            int option = -1;
+            while (option == 0 || option == 1) {
+                System.out.println(message);
+
+                option = scanner.nextInt();
+
+                switch (option) {
+                    case 0:
+                        break;
+                    case 1:
+                        bank.addSavingAccount(client);
+                        break;
+                    default:
+                        System.out.println("Valor Digitado Invalidado.");
+                        break;
+                }
+            }
+        }
+    }
+
+    
 }
