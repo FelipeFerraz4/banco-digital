@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.bluefox.exception.account.InsufficientBankBalanceException;
+import com.bluefox.exception.account.InvalidValue;
 import com.bluefox.utils.Rate;
 
 public class SavingAccount extends Account{
@@ -19,7 +21,7 @@ public class SavingAccount extends Account{
     }
 
     public void addInvestment(double value) {
-        investiments.add(new Investiment(LocalDateTime.now(), LocalDate.now(), value));
+        investiments.add(new Investiment(LocalDateTime.now(), value));
     }
 
     public double getTotalInvested() {
@@ -62,4 +64,61 @@ public class SavingAccount extends Account{
         this.getAccountNumber(), 
         this.getBankBalance());
     }
+
+    public void savingDeposit(double value, Account account) throws InvalidValue, InsufficientBankBalanceException {
+        if (value < 0.01) {
+            throw new InvalidValue("Invalid value, withdraw at least R$ 0,01");
+        } else if (account.getBankBalance() < value) {
+            throw new InsufficientBankBalanceException();
+        }
+
+        account.setBankBalance(account.getBankBalance() - value);
+
+        this.setBankBalance(getTotalInvested());
+        
+        this.setBankBalance(this.getBankBalance() + value);
+        addInvestment(value);
+    }
+
+    public void savingWithdraw(double value, Account account) throws InvalidValue, InsufficientBankBalanceException {
+        this.setBankBalance(getTotalInvested());
+
+        if (value < 0.01) {
+            throw new InvalidValue("Invalid value, withdraw at least R$ 0,01");
+        } else if (this.getBankBalance() < value) {
+            throw new InsufficientBankBalanceException();
+        }
+        this.setBankBalance(this.getBankBalance() - value);
+
+        removeInvestment(value);
+
+        account.setBankBalance(account.getBankBalance() + value);
+    }
+
+    private void removeInvestment(double value) throws InsufficientBankBalanceException {
+        List<Investiment> investimentToRemove = new ArrayList<>();
+
+        int i = investiments.size() - 1;
+        while(value > 0 && i >= 0) {
+            Investiment investiment = investiments.get(i);
+            
+            if (investiment.getValueInvested() > value) {
+                investiments.get(i).setValueInvested(investiment.getValueInvested() - value);
+                value = 0;
+            } else if (investiment.getValueInvested() == value) {
+                investimentToRemove.add(investiment);
+                value = 0;
+            } else {
+                investimentToRemove.add(investiment);
+                value = value - investiment.getValueInvested();
+            }
+            i -= 1;
+        }
+
+        if (!investimentToRemove.isEmpty()) {
+            investiments.removeAll(investimentToRemove);
+        }
+
+    }
+
 }

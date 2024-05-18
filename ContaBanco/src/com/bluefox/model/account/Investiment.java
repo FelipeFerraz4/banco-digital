@@ -8,9 +8,9 @@ public class Investiment {
     private LocalDate lastUpdate;
     private double valueInvested;
     
-    public Investiment(LocalDateTime startDate, LocalDate lastUpdate, double valueInvested) {
+    public Investiment(LocalDateTime startDate, double valueInvested) {
         this.startDate = startDate;
-        this.lastUpdate = lastUpdate;
+        this.lastUpdate = startDate.toLocalDate();
         this.valueInvested = valueInvested;
     }
 

@@ -74,6 +74,7 @@ public abstract class Account {
         return bankBalance;
     }
 
+    
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -103,5 +104,9 @@ public abstract class Account {
     public String toString() {
         return "Account [accountType: " + accountType + ", bankBranch: " + bankBranch + ", accountNumber: " + accountNumber
                 + ", bankBalance: " + bankBalance + "]";
+    }
+
+    protected void setBankBalance(double bankBalance) {
+        this.bankBalance = bankBalance;
     }
 }
