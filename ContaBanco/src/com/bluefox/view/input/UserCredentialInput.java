@@ -1,5 +1,6 @@
 package com.bluefox.view.input;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.bluefox.exception.validations.EmptyOrNullElementException;
@@ -16,7 +17,7 @@ public class UserCredentialInput {
                 name = scanner.nextLine();
                 CustomerValidation.isValidName(name);
                 break;
-            } catch (EmptyOrNullElementException | InvalidElementException e) {
+            } catch (EmptyOrNullElementException | InvalidElementException | InputMismatchException e) {
                 System.out.println("Nome invalido, digite apenas letras");
             }
         }
@@ -32,7 +33,7 @@ public class UserCredentialInput {
                 CustomerValidation.isValidCPF(cpf);
                 break;
             } 
-            catch (EmptyOrNullElementException e) {
+            catch (EmptyOrNullElementException | InputMismatchException e) {
                 System.out.println("CPF invalido");
             }
         }
@@ -47,9 +48,10 @@ public class UserCredentialInput {
                 password = scanner.nextLine();
                 CustomerValidation.isValidPassword(password);
                 break;
-            } 
-            catch (EmptyOrNullElementException e) {
+            } catch (EmptyOrNullElementException e) {
                 System.out.println("Senha invalida, não pode ser vazia");
+            } catch (InputMismatchException e) {
+                System.out.println("Valor digitado Invalido.");
             }
         }
         return password;

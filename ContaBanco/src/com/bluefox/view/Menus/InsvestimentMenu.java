@@ -3,12 +3,10 @@ package com.bluefox.view.menus;
 import java.util.Scanner;
 
 import com.bluefox.controller.Bank;
-import com.bluefox.exception.account.EmptySavingAccountException;
 import com.bluefox.exception.account.InsufficientBankBalanceException;
 import com.bluefox.exception.account.InvalidValue;
 import com.bluefox.exception.bank.ElementNotFindException;
 import com.bluefox.exception.bank.EmptyCustomerBankException;
-import com.bluefox.model.account.Account;
 import com.bluefox.model.account.SavingAccount;
 import com.bluefox.model.client.Client;
 import com.bluefox.view.input.UserOperationInput;
@@ -20,16 +18,14 @@ public class InsvestimentMenu {
             
             int option = -1;
             
-            while (option != 0) {
-                String options = String.format("==== Poupança ====%n" +
-                "Valor na poupança: R$ %.2f" +
-                "%n1 - Depositar na Poupança." +
-                "%n2 - Retirar da Poupança." +
-                "%n0 - Fechar Menu.", savingAccount.getTotalInvested());
-
-                System.out.println(options);
-
-                option = scanner.nextInt();
+            String options = String.format("==== Poupança ====%n" +
+            "Valor na poupança: R$ %.2f" +
+            "%n1 - Depositar na Poupança." +
+            "%n2 - Retirar da Poupança." +
+            "%n0 - Fechar Menu.", savingAccount.getTotalInvested());
+            
+            do {
+                option = HomeMenu.getAnswerMenu(options, 3, scanner);
 
                 switch (option) {
                     case 0:
@@ -42,10 +38,10 @@ public class InsvestimentMenu {
                         withdraw(scanner, bank, client, savingAccount);
                         break;
                     default:
-                        System.out.println("Valor Digitado Invalidado.");
+                        System.out.println("Valor Digitado Invalido.");
                         break;
                 }
-            }
+            }while(option != 0);
         } catch (ElementNotFindException e) {
             System.out.println("Conta Poupaça Não Encontrada");
         }

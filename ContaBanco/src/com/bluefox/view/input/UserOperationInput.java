@@ -1,5 +1,6 @@
 package com.bluefox.view.input;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.bluefox.exception.validations.InvalidElementException;
@@ -14,7 +15,7 @@ public class UserOperationInput {
                 value = scanner.nextDouble();
                 OperationValidation.isValidValue(value);
                 break;
-            } catch (InvalidElementException e) {
+            } catch (InvalidElementException | InputMismatchException e) {
                 System.out.println("Valor informado invalido.");
             }
         }
@@ -29,7 +30,7 @@ public class UserOperationInput {
                 bankBranch = scanner.nextInt();
                 OperationValidation.isValidBankBranch(bankBranch);;
                 break;
-            } catch (InvalidElementException e) {
+            } catch (InvalidElementException | InputMismatchException e) {
                 System.out.println("Agência informado invalida.");
             }
         }
@@ -44,7 +45,7 @@ public class UserOperationInput {
                 accountNumber = scanner.nextInt();
                 OperationValidation.isValidAccountNumber(accountNumber);
                 break;
-            } catch (InvalidElementException e) {
+            } catch (InvalidElementException | InputMismatchException e) {
                 System.out.println("Número da conta informado invalido.");
             }
         }

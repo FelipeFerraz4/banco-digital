@@ -1,5 +1,6 @@
 package com.bluefox.view.menus;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.bluefox.controller.Bank;
@@ -25,10 +26,8 @@ public class HomeMenu {
 
         int option = -1;
 
-        while (option != 0) {
-            System.out.println(options);
-
-            option = scanner.nextInt();
+        do {
+            option = getAnswerMenu(options, 3, scanner);
 
             switch (option) {
                 case 0:
@@ -42,10 +41,10 @@ public class HomeMenu {
                     System.out.println("Conta Criada com Sucesso.");
                     break;
                 default:
-                    System.out.println("Valor digitado Invalidado.");
+                    System.out.println("Valor digitado Invalido.");
                     break;
             }
-        }
+        }while(option != 0);
     }
 
     private void Login(Scanner scanner) {
@@ -87,5 +86,27 @@ public class HomeMenu {
         
     }
 
-    
+    public static int getAnswerMenu(String options, int optionNumber,  Scanner scanner) {
+        int option = -1;
+        
+        do {
+            try {
+                System.out.println(options);
+                option = scanner.nextInt();
+
+                if (option < 0 || option > optionNumber) {
+                    System.out.println("Valor digitado Invalido.");
+                }
+                
+            } catch (InputMismatchException e) {
+                System.out.println("Valor digitado Invalido.");
+                if(scanner.hasNextLine()) {
+                    scanner.nextLine();
+                }
+            }
+                
+        }while(option < 0 || option > optionNumber);
+
+        return option;
+    }
 }

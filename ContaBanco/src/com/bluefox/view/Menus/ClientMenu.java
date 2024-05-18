@@ -24,10 +24,8 @@ public class ClientMenu {
 
         int option = -1;
 
-        while (option != 0) {
-            System.out.println(options);
-
-            option = scanner.nextInt();
+        do {
+            option = HomeMenu.getAnswerMenu(options, 7, scanner);
 
             switch (option) {
                 case 0:
@@ -52,10 +50,10 @@ public class ClientMenu {
                     getClientData(client);
                     break;
                 default:
-                    System.out.println("Valor Digitado Invalidado.");
+                    System.out.println("Valor Digitado Invalido.");
                     break;
             }
-        }
+        }while(option != 0);
     }
 
     private static void getClientData(Client client) {
@@ -133,22 +131,19 @@ public class ClientMenu {
                         "1 - Sim%n" +
                         "0 - Não");
             int option = -1;
-            while (option != 0 && option != 1) {
-                System.out.println(message);
 
-                option = scanner.nextInt();
+            option = HomeMenu.getAnswerMenu(message, 2, scanner);
 
-                switch (option) {
-                    case 0:
-                        break;
-                    case 1:
-                        bank.addSavingAccount(client);
-                        InsvestimentMenu.SavingMenu(scanner, bank, client);
-                        break;
-                    default:
-                        System.out.println("Valor Digitado Invalidado.");
-                        break;
-                }
+            switch (option) {
+                case 0:
+                    break;
+                case 1:
+                    bank.addSavingAccount(client);
+                    InsvestimentMenu.SavingMenu(scanner, bank, client);
+                    break;
+                default:
+                    System.out.println("Valor Digitado Invalido.");
+                    break;
             }
         }
     }
