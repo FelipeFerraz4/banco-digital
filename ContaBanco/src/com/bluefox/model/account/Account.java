@@ -1,5 +1,8 @@
 package com.bluefox.model.account;
 
+import com.bluefox.exception.account.InsufficientBankBalanceException;
+import com.bluefox.exception.account.InvalidValue;
+
 public abstract class Account {
     
     private static final int BANK_BRANCH = 1;
@@ -17,27 +20,27 @@ public abstract class Account {
         this.bankBalance = 0;
     }
 
-    protected void bankWithdraw(double value) {
+    public void bankWithdraw(double value) throws InvalidValue, InsufficientBankBalanceException {
         if (value < 2) {
-            System.out.println("Invalid value, withdraw at least R$ 2,00");
+            throw new InvalidValue("Invalid value, withdraw at least R$ 2,00");
         } else if (this.bankBalance < value) {
-            System.out.println("Insufficient bank balance for operation");
+            throw new InsufficientBankBalanceException();
         }
 
         this.bankBalance -= value;
     }
 
-    protected void bankDeposit(double value) {
+    public void bankDeposit(double value) throws InvalidValue {
         if (value < 0.01) {
-            System.out.println("Invalid value, deposit at least R$ 0,01");
+            throw new InvalidValue("Invalid value, deposit at least R$ 0,01");
         }
 
         this.bankBalance += value;
     }
 
-    protected void bankTransfer(double value, Account account) {
+    public void bankTransfer(double value, Account account) throws InvalidValue, InsufficientBankBalanceException {
         if(this.bankBalance < value) {
-            System.out.println("Insufficient bank balance for operation");
+            throw new InsufficientBankBalanceException();
         }
         account.bankDeposit(value);
         this.bankBalance -= value;
@@ -47,7 +50,7 @@ public abstract class Account {
         return String.format("==== Account ====%n" +
         "Bank Branch: %04d%n" +
         "Account Number: %06d%n" +
-        "Bank Balance: $ %.2f" , this.getBankBranch(), this.getAccountNumber(), this.getBankBalance()).replace(",", ".");
+        "Bank Balance: R$ %.2f" , this.getBankBranch(), this.getAccountNumber(), this.getBankBalance());
     }
 
     public String getBankingOperationAvailable() {
@@ -55,22 +58,23 @@ public abstract class Account {
         "\nWithdraw" + "\nDeposit" + "\nTransfer";
     }
 
-    protected String getAccountType() {
+    public String getAccountType() {
         return accountType;
     }
 
-    protected int getBankBranch() {
+    public int getBankBranch() {
         return bankBranch;
     }
 
-    protected int getAccountNumber() {
+    public int getAccountNumber() {
         return accountNumber;
     }
 
-    protected double getBankBalance() {
+    public double getBankBalance() {
         return bankBalance;
     }
 
+    
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -100,5 +104,9 @@ public abstract class Account {
     public String toString() {
         return "Account [accountType: " + accountType + ", bankBranch: " + bankBranch + ", accountNumber: " + accountNumber
                 + ", bankBalance: " + bankBalance + "]";
+    }
+
+    protected void setBankBalance(double bankBalance) {
+        this.bankBalance = bankBalance;
     }
 }
