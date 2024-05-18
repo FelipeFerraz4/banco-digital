@@ -26,7 +26,7 @@ public class InsvestimentMenu {
                 "%n1 - Depositar na Poupança." +
                 "%n2 - Retirar da Poupança." +
                 "%n0 - Fechar Menu.", savingAccount.getTotalInvested());
-                
+
                 System.out.println(options);
 
                 option = scanner.nextInt();
@@ -37,10 +37,9 @@ public class InsvestimentMenu {
                         break;
                     case 1:
                         deposit(scanner, bank, client, savingAccount);
-                        // System.out.println("Deposito");
                         break;
                     case 2:
-                        System.out.println("retirar");
+                        withdraw(scanner, bank, client, savingAccount);
                         break;
                     default:
                         System.out.println("Valor Digitado Invalidado.");
@@ -56,10 +55,26 @@ public class InsvestimentMenu {
         try {
             System.out.println("==== Depósito na Poupança ====");
             double value = UserOperationInput.getValue(scanner);
-            int bankBranch = account.getBankBranch();
-            int accountNumber = account.getAccountNumber();
-            bank.transfer(value, client, bankBranch, accountNumber);
+            bank.depositSavingAccount(value, client, account);
             System.out.println("Depósito realizada com sucesso.");
+        } catch (InvalidValue e) {
+            System.out.println("Valor invalido, deve ser no mínimo R$ 0,01.");
+        } catch (InsufficientBankBalanceException e) {
+            System.out.println("Saldo insuficiente");
+        } catch (EmptyCustomerBankException | ElementNotFindException e) {
+            System.out.println("A conta de destino informada não foi encontrada.");
+            System.out.println("Por favor, verifique se os dados inseridos estão corretos.");
+        }
+    }
+
+    private static void withdraw(Scanner scanner, Bank bank, Client client, SavingAccount account) {
+        try {
+            System.out.println("==== Saque da Poupança ====");
+            double value = UserOperationInput.getValue(scanner);
+            int bankBranch = client.getAccounts().get(0).getBankBranch();
+            int accountNumber = client.getAccounts().get(0).getAccountNumber();
+            bank.withdrawSavingAccount(value, client, account, bankBranch, accountNumber);
+            System.out.println("Saque realizada com sucesso.");
         } catch (InvalidValue e) {
             System.out.println("Valor invalido, deve ser no mínimo R$ 0,01.");
         } catch (InsufficientBankBalanceException e) {

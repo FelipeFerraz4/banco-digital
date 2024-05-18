@@ -55,6 +55,22 @@ public class Bank {
         addOperation(statemente, client);
     }
 
+    public void depositSavingAccount(double value, Client client, Account account) throws EmptyCustomerBankException, ElementNotFindException, InvalidValue, InsufficientBankBalanceException {
+
+        client.getAccounts().get(0).bankTransfer(value, account);
+        String statemente = String.format("%s -> Depósito na Poupança no valor de %.2f da conta corrente", getFormatDate(), value);
+        addOperation(statemente, client);
+    }
+
+    public void withdrawSavingAccount(double value, Client client, Account savingAccount, int bankBranch, int accountNumber) throws EmptyCustomerBankException, ElementNotFindException, InvalidValue, InsufficientBankBalanceException {
+        Account account = checkAccountExistence(bankBranch, accountNumber);
+
+        savingAccount.bankTransfer(value, account);
+
+        String statemente = String.format("%s -> Retirada da Poupança no valor de %.2f para a conta corrente", getFormatDate(), value, accountNumber, bankBranch);
+        addOperation(statemente, client);
+    }
+
     public Account checkAccountExistence(int bankBranch, int accountNumber) throws EmptyCustomerBankException, ElementNotFindException {
         if (clients.isEmpty()) {
             throw new EmptyCustomerBankException();
