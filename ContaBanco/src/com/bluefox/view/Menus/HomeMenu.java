@@ -67,15 +67,24 @@ public class HomeMenu {
 
 
     private void createAccount(Scanner scanner) {
-        if(scanner.hasNextLine()) {
-            scanner.nextLine();
+        try {
+            if(scanner.hasNextLine()) {
+                scanner.nextLine();
+            }
+            System.out.println("==== Seja um Cliente do Banco ====");
+            String name = UserCredentialInput.getFullName(scanner);
+            String cpf = UserCredentialInput.getCPF(scanner);
+            String password = UserCredentialInput.getPassword(scanner);
+    
+            bank.addClient(name, password, cpf);
+            Client client = bank.checkClient(cpf, password);
+            ClientMenu.customerMenu(scanner, bank, client);
+        } catch (EmptyCustomerBankException | ElementNotFindException e) {
+            System.out.println("Conta não encontrada");
+        } catch (IncompatiblePasswordException e) {
+            System.out.println("Senha ou CPF invalido");
         }
-        System.out.println("==== Seja um Cliente do Banco ====");
-        String name = UserCredentialInput.getFullName(scanner);
-        String cpf = UserCredentialInput.getCPF(scanner);
-        String password = UserCredentialInput.getPassword(scanner);
-
-        bank.addClient(name, password, cpf);
+        
     }
 
     

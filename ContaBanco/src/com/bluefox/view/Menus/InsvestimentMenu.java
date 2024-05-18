@@ -7,13 +7,10 @@ import com.bluefox.model.client.Client;
 
 public class InsvestimentMenu {
     public static void SavingMenu(Scanner scanner, Bank bank, Client client) {
-        String options = String.format("==== Poupança ====" +
-        "%Valor: - Extrato." +
-        "%n2 - Saque." +
-        "%n3 - Depósito." +
-        "%n4 - Transferir." +
-        "%n5 - Poupança." +
-        "%n6 - Mostrar Meus Dados." +
+        String options = String.format("==== Poupança ====%n" +
+        "Valor na poupança: R$ 100,00" +
+        "%n1 - Depositar na Poupança." +
+        "%n2 - Retirar da Poupança." +
         "%n0 - Fechar Menu.");
 
         int option = -1;
@@ -28,22 +25,10 @@ public class InsvestimentMenu {
                     System.out.println("Menu Fechado");
                     break;
                 case 1:
-                    // statement(client, bank);
+                    System.out.println("Deposito");
                     break;
                 case 2:
-                    // withdraw(scanner, client, bank);
-                    break;
-                case 3:
-                    // deposit(scanner, client, bank);
-                    break;
-                case 4:
-                    // transfer(scanner, client, bank);
-                    break;
-                case 5:
-                    System.out.println("Login Successfully");
-                    break;
-                case 6:
-                    // getClientData(client);
+                    System.out.println("retirar");
                     break;
                 default:
                     System.out.println("Valor Digitado Invalidado.");

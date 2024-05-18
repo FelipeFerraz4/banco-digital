@@ -129,11 +129,11 @@ public class ClientMenu {
             InsvestimentMenu.SavingMenu(scanner, bank, client);
         } else {
             String message = String.format("==== Poupança ====%n" + 
-                        "Gostaria de criar conta poupaça: " + 
+                        "Gostaria de criar conta poupança: %n" + 
                         "1 - Sim%n" +
-                        "0 - Não%n");
+                        "0 - Não");
             int option = -1;
-            while (option == 0 || option == 1) {
+            while (option != 0 && option != 1) {
                 System.out.println(message);
 
                 option = scanner.nextInt();
@@ -143,6 +143,7 @@ public class ClientMenu {
                         break;
                     case 1:
                         bank.addSavingAccount(client);
+                        InsvestimentMenu.SavingMenu(scanner, bank, client);
                         break;
                     default:
                         System.out.println("Valor Digitado Invalidado.");
