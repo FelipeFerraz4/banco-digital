@@ -23,9 +23,10 @@ public class SavingAccount extends Account{
         investiments.add(new Investiment(LocalDateTime.now(), LocalDate.now(), value));
     }
 
-    public double getTotalInvested() throws EmptySavingAccountException {
+    public double getTotalInvested() {
         if(investiments.isEmpty()) {
-            throw new EmptySavingAccountException();
+            // throw new EmptySavingAccountException();
+            return 0;
         }
 
         investiments = investiments.stream().map(investiment -> updateInvestment(investiment)).collect(Collectors.toList());

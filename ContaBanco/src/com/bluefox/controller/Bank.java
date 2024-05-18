@@ -118,9 +118,26 @@ public class Bank {
         return clientToCheck;
     }
 
+    public Account getSavingAccount(Client client) throws ElementNotFindException {
+        Account savingAccount = null;
+
+        for (Account account : client.getAccounts()) {
+            if(account.getAccountType().equalsIgnoreCase("saving account")) {
+                savingAccount = account;
+            }
+        }
+
+        if (savingAccount == null) {
+            throw new ElementNotFindException("Not Find Saving Account");
+        }
+
+        return savingAccount;
+    }
+
     @Override
     public String toString() {
         return "Bank [clients=" + clients + "]";
     }
+    
     
 }
